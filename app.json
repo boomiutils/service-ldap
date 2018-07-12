@@ -1,0 +1,6 @@
+{
+  "name": "Boomi Flow Ldap Service",
+  "description": "A service for Boomi Flow that allows you to leverage LDAP for Authentication and Authorization.",
+  "repository": "https://github.com/boomiutils/service-ldap",
+  "keywords": ["manywho", "boomi", "ldap", "authentication", "plugin", "workflow"]
+}
