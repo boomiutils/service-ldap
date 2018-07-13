@@ -170,7 +170,7 @@ public class LdapHelper {
     }
 
     private LdapUser getUserFromLDAP(String userName, Hashtable props, boolean fetchGroups, String grpClassName, String userId) throws AuthenticationException{
-        LdapUser user = null;
+        LdapUser user = new LdapUser();
         DirContext context;
         try {
             context = LdapCtxFactory.getLdapCtxInstance("ldap://" + configuration.getHost(), props);
