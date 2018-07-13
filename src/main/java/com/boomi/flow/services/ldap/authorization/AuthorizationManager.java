@@ -60,15 +60,12 @@ public class AuthorizationManager {
                 status = "200";
                 break;
             case Specified:
-                System.out.println("************Specified***********");
                 if (authenticatedWho.getUserId().equals("PUBLIC_USER")) {
                     break;
                 }
 
                 try {
-                    System.out.println("************Trying to auth for admin side**********");
                    ldapUser = helper.authorizeUser(authenticatedWho.getUserId());
-                    System.out.println("************Found the User**********");
                 } catch (AuthenticationException e) {
                     e.printStackTrace();
                     break;
@@ -79,7 +76,6 @@ public class AuthorizationManager {
                     for (Iterator<User> iter = request.getAuthorization().getUsers().iterator(); iter.hasNext(); ) {
                         User u = iter.next();
                         if (ldapUser.getUsername().equals(u.getAuthenticationId())){
-                            System.out.println("************User matches a listed User***********");
                             status = "200";
                             break;
                         }
@@ -91,10 +87,12 @@ public class AuthorizationManager {
                     System.out.println("************Checking Groups***********");
                     // If the user is a member of no groups, then they're automatically not authorized
                     if (ldapUser.getGroups() == null || ldapUser.getGroups().isEmpty()) {
+                        System.out.println("************groups are empty***********");
                         break;
                     }
                     for (Iterator<Group> iter = request.getAuthorization().getGroups().iterator(); iter.hasNext(); ) {
                         Group g = iter.next();
+                        System.out.println("group "+g.getAuthenticationId().toString());
                         if (ldapUser.getGroups().contains(g.getAuthenticationId())){
                             System.out.println("************Groups Match***********");
                             status = "200";

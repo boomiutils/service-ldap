@@ -182,7 +182,6 @@ public class LdapHelper {
                 userName = userId.substring(userId.indexOf(":")+2, userId.length());
             }
             String filter = "(&("+configuration.getUidIdentifier()+"=" + userName + ")(objectClass="+configuration.getUserObjectClass()+"))";
-            System.out.println("%%%%%%%%%%%%%%%% Filterr %%%%%%%%%%%%%%%% "+filter);
             NamingEnumeration<SearchResult> renum = context.search(configuration.getAuthBaseDn(),filter, controls);
             if (!renum.hasMore()) {
                 throw new AuthenticationException("Unable to locate user in directory");
