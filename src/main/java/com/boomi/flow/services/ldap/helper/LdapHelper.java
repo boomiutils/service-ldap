@@ -100,7 +100,7 @@ public class LdapHelper {
             SearchControls controls = new SearchControls();
             controls.setSearchScope(SUBTREE_SCOPE);
             groupName = groupName.substring(groupName.indexOf(":")+2,groupName.length());
-            userId = userId.substring((userId.indexOf(":")+2, userId.length());
+            userId = userId.substring(userId.indexOf(":")+2, userId.length());
             String filter = "(&(objectClass="+configuration.getUserObjectClass()+")("+configuration.getUidIdentifier()+"="+userId+")(cn="+groupName+","+configuration.getGroupBaseDn()+"))";
             System.out.println(filter);
             NamingEnumeration<SearchResult> renum = context.search(configuration.getBaseDn(),filter, controls);
