@@ -125,7 +125,7 @@ public class AuthorizationManager {
                     typeBuilder.from(groups)
             );
         } catch (AuthenticationException e) {
-            // do nothing
+            e.printStackTrace();
         }
         return null;
     }
@@ -146,7 +146,7 @@ public class AuthorizationManager {
                     typeBuilder.from(users)
             );
         } catch (AuthenticationException e) {
-            // do nothing
+            e.printStackTrace();
         }
         return null;
     }

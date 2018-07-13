@@ -27,8 +27,8 @@
       <file leaf-file-name="AuthorizationManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/authorization/AuthorizationManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7848101">
-              <caret line="150" column="20" selection-start-line="150" selection-start-column="20" selection-end-line="150" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.8924051">
+              <caret line="148" column="32" selection-start-line="148" selection-start-column="32" selection-end-line="148" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -633,12 +633,12 @@
       <updated>1531423846068</updated>
       <workItem from="1531423855524" duration="313000" />
       <workItem from="1531424212696" duration="406000" />
-      <workItem from="1531425029873" duration="27215000" />
+      <workItem from="1531425029873" duration="27613000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27934000" />
+    <option name="totallyTimeSpent" value="28332000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="112" y="45" width="1726" height="928" extended-state="0" />
@@ -867,8 +867,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/authorization/AuthorizationManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7848101">
-          <caret line="150" column="20" selection-start-line="150" selection-start-column="20" selection-end-line="150" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.8924051">
+          <caret line="148" column="32" selection-start-line="148" selection-start-column="32" selection-end-line="148" selection-end-column="32" />
           <folding />
         </state>
       </provider>
