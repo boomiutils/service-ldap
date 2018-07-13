@@ -66,7 +66,7 @@ public class LdapHelper {
         DirContext context;
 
         try {
-            user = getUserFromLDAP(credentials.getUsername(),props, true, configuration.getGroupObjectClass(), userId);
+            user = getUserFromLDAP(configuration.getPrincipal(),props, true, configuration.getGroupObjectClass(), userId);
         } catch (AuthenticationException a) {
             throw new AuthenticationException("Authentication failed: " + a);
         } catch (NamingException e) {
