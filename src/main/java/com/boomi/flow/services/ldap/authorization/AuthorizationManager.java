@@ -60,11 +60,13 @@ public class AuthorizationManager {
                 status = "200";
                 break;
             case Specified:
+                System.out.println("************Specified***********");
                 if (authenticatedWho.getUserId().equals("PUBLIC_USER")) {
                     break;
                 }
                 try {
                    ldapUser = helper.authorizeUser(authenticatedWho.getUserId());
+                    System.out.println("************Found the User**********");
                 } catch (AuthenticationException e) {
                     break;
                 }
@@ -74,6 +76,7 @@ public class AuthorizationManager {
                     for (Iterator<User> iter = request.getAuthorization().getUsers().iterator(); iter.hasNext(); ) {
                         User u = iter.next();
                         if (ldapUser.getUsername().equals(u.getAuthenticationId())){
+                            System.out.println("************User matches a listed User***********");
                             status = "200";
                             break;
                         }
@@ -82,6 +85,7 @@ public class AuthorizationManager {
 
                 // We need to check if the authenticated user is a member of one of the given groups, by group ID
                 if (request.getAuthorization().hasGroups()) {
+                    System.out.println("************Checking Groups***********");
                     // If the user is a member of no groups, then they're automatically not authorized
                     if (ldapUser.getGroups() == null || ldapUser.getGroups().isEmpty()) {
                         break;
@@ -89,12 +93,14 @@ public class AuthorizationManager {
                     for (Iterator<Group> iter = request.getAuthorization().getGroups().iterator(); iter.hasNext(); ) {
                         Group g = iter.next();
                         if (ldapUser.getGroups().contains(g.getAuthenticationId())){
+                            System.out.println("************Groups Match***********");
                             status = "200";
                             break;
                         }
                     }
                 }
             default:
+                System.out.println("***********Defualt is no go***********");
                 status = "401";
                 break;
         }
