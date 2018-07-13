@@ -70,6 +70,7 @@ public class AuthorizationManager {
                    ldapUser = helper.authorizeUser(authenticatedWho.getUserId());
                     System.out.println("************Found the User**********");
                 } catch (AuthenticationException e) {
+                    e.printStackTrace();
                     break;
                 }
 
