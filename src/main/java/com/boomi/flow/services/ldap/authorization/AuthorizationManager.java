@@ -64,7 +64,9 @@ public class AuthorizationManager {
                 if (authenticatedWho.getUserId().equals("PUBLIC_USER")) {
                     break;
                 }
+
                 try {
+                    System.out.println("************Trying to auth for admin side**********");
                    ldapUser = helper.authorizeUser(authenticatedWho.getUserId());
                     System.out.println("************Found the User**********");
                 } catch (AuthenticationException e) {
