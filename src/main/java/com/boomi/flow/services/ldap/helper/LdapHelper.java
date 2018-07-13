@@ -34,23 +34,63 @@ public class LdapHelper {
         credentials = creds;
     }
 
+    public LdapHelper(ApplicationConfiguration config){
+        configuration = config;
+    }
+
     public LdapUser authenticateUser() throws AuthenticationException {
         // object to return
         LdapUser user = new LdapUser();
 
         // bind by using the specified username/password
-        Hashtable props = new Hashtable();
-        String principalName = credentials.getUsername();
-        props.put(Context.SECURITY_PRINCIPAL, configuration.getUidIdentifier()+"="+principalName+","+configuration.getBaseDn()+"");
-        props.put(Context.SECURITY_CREDENTIALS, credentials.getPassword());
+        Hashtable props = buildProps(credentials.getUsername(),credentials.getPassword(),configuration.getUidIdentifier(),configuration.getBaseDn());
         DirContext context;
 
+        try {
+            user = getUserFromLDAP(credentials.getUsername(),props, false, null, null);
+        } catch (AuthenticationException a) {
+            throw new AuthenticationException("Authentication failed: " + a);
+        } catch (NamingException e) {
+            throw new AuthenticationException("Failed to bind to LDAP / get account information: " + e);
+        }
+        return user;
+    }
+
+    public LdapUser authorizeUser(String userId) throws AuthenticationException {
+        // object to return
+        LdapUser user = new LdapUser();
+
+        // bind by using the specified username/password
+        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getUidIdentifier(),configuration.getBaseDn());
+        DirContext context;
+
+        try {
+            user = getUserFromLDAP(credentials.getUsername(),props, true, configuration.getGroupObjectClass(), userId);
+        } catch (AuthenticationException a) {
+            throw new AuthenticationException("Authentication failed: " + a);
+        } catch (NamingException e) {
+            throw new AuthenticationException("Failed to bind to LDAP / get account information: " + e);
+        }
+        return user;
+    }
+
+    private Hashtable buildProps(String userName, String password, String uidIdentifier, String baseDn){
+        Hashtable props = new Hashtable();
+        String principalName = userName;
+        props.put(Context.SECURITY_PRINCIPAL, uidIdentifier+"="+principalName+","+baseDn+"");
+        props.put(Context.SECURITY_CREDENTIALS, password);
+        return props;
+    }
+
+    private LdapUser getUserFromLDAP(String userName, Hashtable props, boolean fetchGroups, String grpClassName, String userId) throws AuthenticationException{
+        LdapUser user = null;
+        DirContext context;
         try {
             context = LdapCtxFactory.getLdapCtxInstance("ldap://" + configuration.getHost(), props);
             // locate this user's record
             SearchControls controls = new SearchControls();
             controls.setSearchScope(SUBTREE_SCOPE);
-            String filter = "(&("+configuration.getUidIdentifier()+"=" + principalName + ")(objectClass="+configuration.getUserObjectClass()+"))";
+            String filter = "(&("+configuration.getUidIdentifier()+"=" + userId + ")(objectClass="+configuration.getUserObjectClass()+"))";
             NamingEnumeration<SearchResult> renum = context.search(configuration.getBaseDn(),filter, controls);
             if (!renum.hasMore()) {
                 throw new AuthenticationException("Unable to locate user in directory");
@@ -77,18 +117,18 @@ public class LdapHelper {
                 }
             }
 
-            /*
-            ArrayList<String> groups = new ArrayList<String>();
-            Attribute memberOf = result.getAttributes().get("memberOf");
-            if (memberOf != null) {// null if this user belongs to no group at all
-                for (int i = 0; i < memberOf.size(); i++) {
-                    Attributes atts = context.getAttributes(memberOf.get(i).toString(), new String[] { "CN" });
-                    Attribute att = atts.get("CN");
-                    groups.add(att.get().toString());
+            if (fetchGroups){
+                ArrayList<String> groups = new ArrayList<String>();
+                Attribute memberOf = result.getAttributes().get(grpClassName);
+                if (memberOf != null) {// null if this user belongs to no group at all
+                    for (int i = 0; i < memberOf.size(); i++) {
+                        Attributes atts = context.getAttributes(memberOf.get(i).toString(), new String[] { "CN" });
+                        Attribute att = atts.get("CN");
+                        groups.add(att.get().toString());
+                    }
                 }
+                user.setGroups(groups);
             }
-            user.setGroups(groups);
-            */
             context.close();
 
         } catch (AuthenticationException a) {
