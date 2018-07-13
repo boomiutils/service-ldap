@@ -44,7 +44,6 @@ public class AuthorizationManager {
     public ObjectDataResponse authorization(AuthenticatedWho authenticatedWho, ObjectDataRequest request) {
         ApplicationConfiguration configuration = configurationParser.from(request);
         LdapHelper helper = new LdapHelper(configuration);
-        LdapUser ldapUser = null;
         // deny everyone
         String status = "401";
         switch (request.getAuthorization().getGlobalAuthenticationType()) {
@@ -82,6 +81,7 @@ public class AuthorizationManager {
                         Group g = iter.next();
                         try {
                             if (helper.authorizeUser(authenticatedWho.getUserId(),g.getAuthenticationId())){
+                                System.out.println("Success");
                                 status = "200";
                                 break;
                             }
@@ -91,6 +91,7 @@ public class AuthorizationManager {
                         }
                     }
                 }
+                System.out.println("Failure");
                 status = "401";
                 break;
             default:
