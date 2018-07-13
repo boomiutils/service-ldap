@@ -24,11 +24,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LdapHelper.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LdapHelper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/helper/LdapHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38132912">
+            <state vertical-scroll-proportion="0.0">
               <caret line="182" column="34" selection-start-line="182" selection-start-column="34" selection-end-line="182" selection-end-column="34" />
+              <folding>
+                <marker date="1531509843849" expanded="true" signature="1422:2138" placeholder="{...}" />
+                <marker date="1531509843849" expanded="true" signature="3068:5132" placeholder="{...}" />
+                <marker date="1531509843849" expanded="true" signature="5220:7453" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthenticationManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/authentication/AuthenticationManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthorizationManager.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/authorization/AuthorizationManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7579114">
+              <caret line="117" column="48" selection-start-line="117" selection-start-column="48" selection-end-line="117" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -58,9 +82,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/helper/LdapGroup.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/authentication/AuthenticationManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/helper/LdapUser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/authorization/AuthorizationManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/ApplicationConfiguration.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/helper/LdapHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/authorization/AuthorizationManager.java" />
       </list>
     </option>
   </component>
@@ -613,12 +637,12 @@
       <updated>1531423846068</updated>
       <workItem from="1531423855524" duration="313000" />
       <workItem from="1531424212696" duration="406000" />
-      <workItem from="1531425029873" duration="29685000" />
+      <workItem from="1531425029873" duration="30142000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30404000" />
+    <option name="totallyTimeSpent" value="30861000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="112" y="45" width="1726" height="928" extended-state="0" />
@@ -813,14 +837,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/authentication/AuthenticationManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34968355">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/helper/LdapUser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.83386075">
@@ -837,18 +853,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/authorization/AuthorizationManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/helper/LdapHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.9810126">
-          <caret line="148" column="32" selection-start-line="148" selection-start-column="32" selection-end-line="148" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="182" column="34" selection-start-line="182" selection-start-column="34" selection-end-line="182" selection-end-column="34" />
+          <folding>
+            <marker date="1531509843849" expanded="true" signature="1422:2138" placeholder="{...}" />
+            <marker date="1531509843849" expanded="true" signature="3068:5132" placeholder="{...}" />
+            <marker date="1531509843849" expanded="true" signature="5220:7453" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/authentication/AuthenticationManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/helper/LdapHelper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/authorization/AuthorizationManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38132912">
-          <caret line="182" column="34" selection-start-line="182" selection-start-column="34" selection-end-line="182" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.7579114">
+          <caret line="117" column="48" selection-start-line="117" selection-start-column="48" selection-end-line="117" selection-end-column="48" />
           <folding />
         </state>
       </provider>

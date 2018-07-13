@@ -111,7 +111,7 @@ public class AuthorizationManager {
 
     public ObjectDataResponse groupAttributes() {
         return new ObjectDataResponse(
-                typeBuilder.from(new AuthorizationAttribute("member", "Member"))
+                typeBuilder.from(new AuthorizationAttribute("memberOf", "MemberOf"))
         );
     }
 
