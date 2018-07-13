@@ -179,7 +179,7 @@ public class LdapHelper {
             controls.setSearchScope(SUBTREE_SCOPE);
             if (fetchGroups){
                 //@todo freaking ugly..
-                userName = userId.substring(userId.indexOf(":")+1, userId.length());
+                userName = userId.substring(userId.indexOf(":")+2, userId.length());
             }
             String filter = "(&("+configuration.getUidIdentifier()+"=" + userName + ")(objectClass="+configuration.getUserObjectClass()+"))";
             System.out.println("%%%%%%%%%%%%%%%% Filterr %%%%%%%%%%%%%%%% "+filter);
