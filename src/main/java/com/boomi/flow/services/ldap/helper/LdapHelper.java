@@ -46,7 +46,7 @@ public class LdapHelper {
         DirContext context;
 
         try {
-            context = LdapCtxFactory.getLdapCtxInstance("ldap://" + configuration.getHost() + "." + configuration.getBaseDn() + '/', props);
+            context = LdapCtxFactory.getLdapCtxInstance("ldap://" + configuration.getHost(), props);
 
             // locate this user's record
             SearchControls controls = new SearchControls();
