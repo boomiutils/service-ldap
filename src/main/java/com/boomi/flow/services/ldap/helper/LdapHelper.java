@@ -78,7 +78,7 @@ public class LdapHelper {
     public ArrayList<AuthorizationGroup> getLdapGroups() throws AuthenticationException {
         ArrayList<AuthorizationGroup> groups = new ArrayList<AuthorizationGroup>();
         // bind by using the specified username/password
-        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getUidIdentifier(),configuration.getPrincipalBaseDn());
+        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getPrincipalUidIdentifier(),configuration.getPrincipalBaseDn());
         DirContext context;
 
         try {
@@ -120,7 +120,7 @@ public class LdapHelper {
         ArrayList<AuthorizationUser> users = new ArrayList<AuthorizationUser>();
 
         // bind by using the specified username/password
-        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getUidIdentifier(),configuration.getPrincipalBaseDn());
+        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getPrincipalUidIdentifier(),configuration.getPrincipalBaseDn());
         DirContext context;
 
         try {

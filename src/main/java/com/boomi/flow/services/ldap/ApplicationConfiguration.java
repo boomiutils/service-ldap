@@ -38,6 +38,9 @@ public class ApplicationConfiguration implements Configuration {
     @Configuration.Setting(name = "uidIdentifier", contentType = ContentType.String)
     private String uidIdentifier;
 
+    @Configuration.Setting(name = "principalUidIdentifier", contentType = ContentType.String)
+    private String principalUidIdentifier;
+
     public String getHost() {
         return host;
     }
@@ -80,5 +83,9 @@ public class ApplicationConfiguration implements Configuration {
 
     public String getUidIdentifier() {
         return uidIdentifier;
+    }
+
+    public String getPrincipalUidIdentifier() {
+        return principalUidIdentifier;
     }
 }
