@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import lombok.experimental.var;
 
 // java imports
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.Iterator;
@@ -116,6 +117,16 @@ public class AuthorizationManager {
 
     public ObjectDataResponse groups(ObjectDataRequest request) {
         ApplicationConfiguration configuration = configurationParser.from(request);
+        LdapHelper helper = new LdapHelper(configuration);
+
+        try {
+            ArrayList<AuthorizationGroup> groups = helper.getLdapGroups();
+            return new ObjectDataResponse(
+                    typeBuilder.from(groups)
+            );
+        } catch (AuthenticationException e) {
+            // do nothing
+        }
         return null;
     }
 
@@ -127,6 +138,16 @@ public class AuthorizationManager {
 
     public ObjectDataResponse users(ObjectDataRequest request) {
         ApplicationConfiguration configuration = configurationParser.from(request);
+        LdapHelper helper = new LdapHelper(configuration);
+
+        try {
+            ArrayList<AuthorizationUser> users = helper.getLdapUsers();
+            return new ObjectDataResponse(
+                    typeBuilder.from(users)
+            );
+        } catch (AuthenticationException e) {
+            // do nothing
+        }
         return null;
     }
 }

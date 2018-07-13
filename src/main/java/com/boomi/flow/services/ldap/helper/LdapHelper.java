@@ -16,7 +16,8 @@ import javax.naming.directory.DirContext;
 import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 import javax.naming.ldap.LdapContext;
-
+import com.manywho.sdk.services.types.system.AuthorizationGroup;
+import com.manywho.sdk.services.types.system.AuthorizationUser;
 import static javax.naming.directory.SearchControls.SUBTREE_SCOPE;
 
 // flow imports
@@ -72,6 +73,92 @@ public class LdapHelper {
             throw new AuthenticationException("Failed to bind to LDAP / get account information: " + e);
         }
         return user;
+    }
+
+    public ArrayList<AuthorizationGroup> getLdapGroups() throws AuthenticationException {
+        ArrayList<AuthorizationGroup> groups = new ArrayList<AuthorizationGroup>();
+        // bind by using the specified username/password
+        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getUidIdentifier(),configuration.getBaseDn());
+        DirContext context;
+
+        try {
+            context = LdapCtxFactory.getLdapCtxInstance("ldap://" + configuration.getHost(), props);
+            // locate the groups
+            SearchControls controls = new SearchControls();
+            controls.setSearchScope(SUBTREE_SCOPE);
+            String filter = "(objectClass="+configuration.getGroupObjectClass()+")";
+            NamingEnumeration<SearchResult> renum = context.search(configuration.getBaseDn(),filter, controls);
+            if (!renum.hasMore()) {
+                throw new AuthenticationException("Unable to locate any groups");
+            }
+            while (renum.hasMoreElements()){
+                SearchResult result = renum.nextElement();
+                if (result!=null){
+                    AuthorizationGroup grp = new AuthorizationGroup();
+                    Attributes attributes = result.getAttributes();
+                    if (attributes != null){
+                        if (attributes.get("cn")!=null){
+                            grp.setId(attributes.get("cn").toString());
+                            grp.setName(attributes.get("cn").toString());
+                        }
+                        if (attributes.get("description")!=null){
+                            grp.setDescription(attributes.get("description").toString());
+                        }
+                    }
+                    groups.add(grp);
+                }
+            }
+        } catch (AuthenticationException a) {
+            throw new AuthenticationException("Authentication failed: " + a);
+        } catch (NamingException e) {
+            throw new AuthenticationException("Failed to bind to LDAP / get account information: " + e);
+        }
+        return groups;
+    }
+
+    public ArrayList<AuthorizationUser> getLdapUsers() throws AuthenticationException {
+        ArrayList<AuthorizationUser> users = new ArrayList<AuthorizationUser>();
+
+        // bind by using the specified username/password
+        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getUidIdentifier(),configuration.getBaseDn());
+        DirContext context;
+
+        try {
+            context = LdapCtxFactory.getLdapCtxInstance("ldap://" + configuration.getHost(), props);
+            // locate the groups
+            SearchControls controls = new SearchControls();
+            controls.setSearchScope(SUBTREE_SCOPE);
+            String filter = "(objectClass="+configuration.getUserObjectClass()+")";
+            NamingEnumeration<SearchResult> renum = context.search(configuration.getBaseDn(),filter, controls);
+            if (!renum.hasMore()) {
+                throw new AuthenticationException("Unable to locate any Users");
+            }
+            while (renum.hasMoreElements()){
+                SearchResult result = renum.nextElement();
+                if (result!=null){
+                    AuthorizationUser usr = new AuthorizationUser();
+                    Attributes attributes = result.getAttributes();
+                    if (attributes != null){
+                        String fullName = "";
+                        if (attributes.get("uid")!=null){
+                            usr.setId(attributes.get("uid").toString());
+                        }
+                        if (attributes.get("givenName")!=null){
+                            fullName = attributes.get("givenName").toString();
+                        }
+                        if (attributes.get("sn")!=null){
+                            fullName = fullName +" "+attributes.get("sn").toString();
+                        }
+                    }
+                    users.add(usr);
+                }
+            }
+        } catch (AuthenticationException a) {
+            throw new AuthenticationException("Authentication failed: " + a);
+        } catch (NamingException e) {
+            throw new AuthenticationException("Failed to bind to LDAP / get account information: " + e);
+        }
+        return users;
     }
 
     private Hashtable buildProps(String userName, String password, String uidIdentifier, String baseDn){
