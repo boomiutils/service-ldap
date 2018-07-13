@@ -44,7 +44,7 @@ public class LdapHelper {
         LdapUser user = new LdapUser();
 
         // bind by using the specified username/password
-        Hashtable props = buildProps(credentials.getUsername(),credentials.getPassword(),configuration.getUidIdentifier(),configuration.getBaseDn());
+        Hashtable props = buildProps(credentials.getUsername(),credentials.getPassword(),configuration.getUidIdentifier(),configuration.getAuthBaseDn());
         DirContext context;
 
         try {
@@ -62,7 +62,7 @@ public class LdapHelper {
         LdapUser user = new LdapUser();
 
         // bind by using the specified username/password
-        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getUidIdentifier(),configuration.getBaseDn());
+        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getUidIdentifier(),configuration.getPrincipalBaseDn());
         DirContext context;
 
         try {
@@ -78,7 +78,7 @@ public class LdapHelper {
     public ArrayList<AuthorizationGroup> getLdapGroups() throws AuthenticationException {
         ArrayList<AuthorizationGroup> groups = new ArrayList<AuthorizationGroup>();
         // bind by using the specified username/password
-        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getUidIdentifier(),configuration.getBaseDn());
+        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getUidIdentifier(),configuration.getPrincipalBaseDn());
         DirContext context;
 
         try {
@@ -120,7 +120,7 @@ public class LdapHelper {
         ArrayList<AuthorizationUser> users = new ArrayList<AuthorizationUser>();
 
         // bind by using the specified username/password
-        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getUidIdentifier(),configuration.getBaseDn());
+        Hashtable props = buildProps(configuration.getPrincipal(),configuration.getPassword(),configuration.getUidIdentifier(),configuration.getPrincipalBaseDn());
         DirContext context;
 
         try {
@@ -178,7 +178,7 @@ public class LdapHelper {
             SearchControls controls = new SearchControls();
             controls.setSearchScope(SUBTREE_SCOPE);
             String filter = "(&("+configuration.getUidIdentifier()+"=" + userId + ")(objectClass="+configuration.getUserObjectClass()+"))";
-            NamingEnumeration<SearchResult> renum = context.search(configuration.getBaseDn(),filter, controls);
+            NamingEnumeration<SearchResult> renum = context.search(configuration.getAuthBaseDn(),filter, controls);
             if (!renum.hasMore()) {
                 throw new AuthenticationException("Unable to locate user in directory");
             }

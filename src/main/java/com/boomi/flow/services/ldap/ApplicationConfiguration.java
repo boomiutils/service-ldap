@@ -11,8 +11,14 @@ public class ApplicationConfiguration implements Configuration {
     @Configuration.Setting(name = "Port", contentType = ContentType.String)
     private String port;
 
+    @Configuration.Setting(name = "Auth Base DN", contentType = ContentType.String)
+    private String authBaseDn;
+
     @Configuration.Setting(name = "Base DN", contentType = ContentType.String)
     private String baseDn;
+
+    @Configuration.Setting(name = "Principal Base DN", contentType = ContentType.String)
+    private String principalBaseDn;
 
     @Configuration.Setting(name = "Principal", contentType = ContentType.String)
     private String principal;
@@ -40,8 +46,16 @@ public class ApplicationConfiguration implements Configuration {
         return port;
     }
 
+    public String getAuthBaseDn() {
+        return authBaseDn;
+    }
+
     public String getBaseDn() {
         return baseDn;
+    }
+
+    public String getPrincipalBaseDn() {
+        return principalBaseDn;
     }
 
     public String getPrincipal() {
