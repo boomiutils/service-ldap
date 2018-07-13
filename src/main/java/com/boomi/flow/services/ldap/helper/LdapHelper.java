@@ -101,9 +101,9 @@ public class LdapHelper {
             controls.setSearchScope(SUBTREE_SCOPE);
             groupName = groupName.substring(groupName.indexOf(":")+2,groupName.length());
             userId = userId.substring(userId.indexOf(":")+2, userId.length());
-            String filter = "(&(objectClass="+configuration.getUserObjectClass()+")("+configuration.getUidIdentifier()+"="+userId+")(memberOf=cn="+groupName+","+configuration.getGroupBaseDn()+"))";
+            String filter = "(&(objectClass="+configuration.getUserObjectClass()+")("+configuration.getUidIdentifier()+"="+userId+")(memberOf=cn="+groupName+"))";
             System.out.println(filter);
-            NamingEnumeration<SearchResult> renum = context.search(configuration.getBaseDn(),filter, controls);
+            NamingEnumeration<SearchResult> renum = context.search(configuration.getAuthBaseDn(),filter, controls);
             if (renum.hasMore()) {
                 authorized = true;
             }
