@@ -149,6 +149,7 @@ public class LdapHelper {
                         if (attributes.get("sn")!=null){
                             fullName = fullName +" "+attributes.get("sn").toString();
                         }
+                        usr.setName(fullName);
                     }
                     users.add(usr);
                 }
@@ -163,8 +164,7 @@ public class LdapHelper {
 
     private Hashtable buildProps(String userName, String password, String uidIdentifier, String baseDn){
         Hashtable props = new Hashtable();
-        String principalName = userName;
-        props.put(Context.SECURITY_PRINCIPAL, uidIdentifier+"="+principalName+","+baseDn+"");
+        props.put(Context.SECURITY_PRINCIPAL, uidIdentifier+"="+userName+","+baseDn+"");
         props.put(Context.SECURITY_CREDENTIALS, password);
         return props;
     }
@@ -177,7 +177,10 @@ public class LdapHelper {
             // locate this user's record
             SearchControls controls = new SearchControls();
             controls.setSearchScope(SUBTREE_SCOPE);
-            String filter = "(&("+configuration.getUidIdentifier()+"=" + userId + ")(objectClass="+configuration.getUserObjectClass()+"))";
+            if (fetchGroups){
+                userName = userId;
+            }
+            String filter = "(&("+configuration.getUidIdentifier()+"=" + userName + ")(objectClass="+configuration.getUserObjectClass()+"))";
             NamingEnumeration<SearchResult> renum = context.search(configuration.getAuthBaseDn(),filter, controls);
             if (!renum.hasMore()) {
                 throw new AuthenticationException("Unable to locate user in directory");
