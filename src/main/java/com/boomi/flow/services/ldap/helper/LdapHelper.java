@@ -178,7 +178,9 @@ public class LdapHelper {
             SearchControls controls = new SearchControls();
             controls.setSearchScope(SUBTREE_SCOPE);
             if (fetchGroups){
+                System.out.println("%%%%%%%%%%%%%%%% Fetching for User %%%%%%%%%%%%%%%% ");
                 userName = userId;
+                System.out.println(userName);
             }
             String filter = "(&("+configuration.getUidIdentifier()+"=" + userName + ")(objectClass="+configuration.getUserObjectClass()+"))";
             NamingEnumeration<SearchResult> renum = context.search(configuration.getAuthBaseDn(),filter, controls);

@@ -27,8 +27,8 @@
       <file leaf-file-name="LdapHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/helper/LdapHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27373418">
-              <caret line="64" column="120" selection-start-line="64" selection-start-column="120" selection-end-line="64" selection-end-column="120" />
+            <state vertical-scroll-proportion="0.51582277">
+              <caret line="187" column="88" selection-start-line="187" selection-start-column="88" selection-end-line="187" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -633,12 +633,12 @@
       <updated>1531423846068</updated>
       <workItem from="1531423855524" duration="313000" />
       <workItem from="1531424212696" duration="406000" />
-      <workItem from="1531425029873" duration="32329000" />
+      <workItem from="1531425029873" duration="32619000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33048000" />
+    <option name="totallyTimeSpent" value="33338000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="112" y="45" width="1726" height="928" extended-state="0" />
@@ -867,8 +867,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/boomi/flow/services/ldap/helper/LdapHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27373418">
-          <caret line="64" column="120" selection-start-line="64" selection-start-column="120" selection-end-line="64" selection-end-column="120" />
+        <state vertical-scroll-proportion="0.51582277">
+          <caret line="187" column="88" selection-start-line="187" selection-start-column="88" selection-end-line="187" selection-end-column="88" />
           <folding />
         </state>
       </provider>
