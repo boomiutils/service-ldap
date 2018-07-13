@@ -91,8 +91,6 @@ public class AuthorizationManager {
                         }
                     }
                 }
-                System.out.println("Failure");
-                status = "401";
                 break;
             default:
                 status = "401";
