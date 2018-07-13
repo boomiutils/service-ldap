@@ -32,11 +32,11 @@ public class AuthorizationManager {
 
     public ObjectDataResponse authorization(AuthenticatedWho authenticatedWho, ObjectDataRequest request) {
         ApplicationConfiguration configuration = configurationParser.from(request);
-        String status = "401";
+        String status = "200";
         var user = new $User();
         user.setDirectoryId("Ldap");
         user.setDirectoryName("Ldap");
-        //user.setAuthenticationType(AuthorizationType.Oauth2);
+        user.setAuthenticationType(AuthorizationType.UsernamePassword);
         //user.setLoginUrl(service.getAuthorizationUrl(additionalParameters));
         user.setStatus(status);
         user.setUserId("");
