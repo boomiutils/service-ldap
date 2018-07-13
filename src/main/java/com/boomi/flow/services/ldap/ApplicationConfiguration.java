@@ -23,6 +23,15 @@ public class ApplicationConfiguration implements Configuration {
     @Configuration.Setting(name = "SSL", contentType = ContentType.Boolean)
     private boolean ssl;
 
+    @Configuration.Setting(name = "UserObjectClass", contentType = ContentType.String)
+    private String userObjectClass;
+
+    @Configuration.Setting(name = "GroupObjectClass", contentType = ContentType.String)
+    private String groupObjectClass;
+
+    @Configuration.Setting(name = "uidIdentifier", contentType = ContentType.String)
+    private String uidIdentifier;
+
     public String getHost() {
         return host;
     }
@@ -45,5 +54,17 @@ public class ApplicationConfiguration implements Configuration {
 
     public boolean getSsl() {
         return ssl;
+    }
+
+    public String getUserObjectClass() {
+        return userObjectClass;
+    }
+
+    public String getGroupObjectClass() {
+        return groupObjectClass;
+    }
+
+    public String getUidIdentifier() {
+        return uidIdentifier;
     }
 }

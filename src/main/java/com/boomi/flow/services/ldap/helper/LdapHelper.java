@@ -40,19 +40,18 @@ public class LdapHelper {
 
         // bind by using the specified username/password
         Hashtable props = new Hashtable();
-        String principalName = credentials.getUsername() + "@" + configuration.getBaseDn();
-        props.put(Context.SECURITY_PRINCIPAL, principalName);
+        String principalName = credentials.getUsername();
+        props.put(Context.SECURITY_PRINCIPAL, configuration.getUidIdentifier()+"="+principalName+","+configuration.getBaseDn()+"");
         props.put(Context.SECURITY_CREDENTIALS, credentials.getPassword());
         DirContext context;
 
         try {
             context = LdapCtxFactory.getLdapCtxInstance("ldap://" + configuration.getHost(), props);
-
             // locate this user's record
             SearchControls controls = new SearchControls();
             controls.setSearchScope(SUBTREE_SCOPE);
-            NamingEnumeration<SearchResult> renum = context.search(toDC(configuration.getBaseDn()),
-                    "(& (userPrincipalName=" + principalName + ")(objectClass=user))", controls);
+            String filter = "(&("+configuration.getUidIdentifier()+"=" + principalName + ")(objectClass="+configuration.getUserObjectClass()+"))";
+            NamingEnumeration<SearchResult> renum = context.search(configuration.getBaseDn(),filter, controls);
             if (!renum.hasMore()) {
                 throw new AuthenticationException("Unable to locate user in directory");
             }
@@ -63,25 +62,22 @@ public class LdapHelper {
                     if (attributes.get("userPrincipalName") != null){
                         user.setUsername(attributes.get("userPrincipalName").toString());
                     }
-
                     if (attributes.get("givenName")!=null){
                         user.setFirstName(attributes.get("givenName").toString());
                     }
-
                     if (attributes.get("sn") != null){
                         user.setLastName(attributes.get("sn").toString());
                     }
-
                     if (attributes.get("mail") != null){
                         user.setEmail(attributes.get("mail").toString());
                     }
-
                     if (attributes.get("displayName") != null){
                         user.setDisplayName(attributes.get("diplayName").toString());
                     }
                 }
             }
 
+            /*
             ArrayList<String> groups = new ArrayList<String>();
             Attribute memberOf = result.getAttributes().get("memberOf");
             if (memberOf != null) {// null if this user belongs to no group at all
@@ -92,6 +88,7 @@ public class LdapHelper {
                 }
             }
             user.setGroups(groups);
+            */
             context.close();
 
         } catch (AuthenticationException a) {
@@ -104,17 +101,5 @@ public class LdapHelper {
 
     public boolean isMember(String grp){
         return true;
-    }
-
-    private String toDC(String domainName) {
-        StringBuilder buf = new StringBuilder();
-        for (String token : domainName.split("\\.")) {
-            if (token.length() == 0)
-                continue; // defensive check
-            if (buf.length() > 0)
-                buf.append(",");
-            buf.append("DC=").append(token);
-        }
-        return buf.toString();
     }
 }
