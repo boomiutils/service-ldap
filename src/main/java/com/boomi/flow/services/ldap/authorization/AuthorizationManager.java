@@ -80,10 +80,8 @@ public class AuthorizationManager {
                 if (request.getAuthorization().hasGroups()) {
                     for (Iterator<Group> iter = request.getAuthorization().getGroups().iterator(); iter.hasNext(); ) {
                         Group g = iter.next();
-                        System.out.println("************"+g.getAuthenticationId()+"***********");
                         try {
                             if (helper.authorizeUser(authenticatedWho.getUserId(),g.getAuthenticationId())){
-                                System.out.println("************Groups Match***********");
                                 status = "200";
                                 break;
                             }
@@ -93,6 +91,8 @@ public class AuthorizationManager {
                         }
                     }
                 }
+                status = "401";
+                break;
             default:
                 status = "401";
                 break;

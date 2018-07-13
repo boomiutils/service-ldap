@@ -99,13 +99,13 @@ public class LdapHelper {
             // locate the groups
             SearchControls controls = new SearchControls();
             controls.setSearchScope(SUBTREE_SCOPE);
+            groupName = groupName.substring(groupName.indexOf(":")+2,groupName.length());
             String filter = "(&(objectClass="+configuration.getUserObjectClass()+")("+configuration.getUidIdentifier()+"="+userId+")(cn="+groupName+","+configuration.getGroupBaseDn()+"))";
             NamingEnumeration<SearchResult> renum = context.search(configuration.getBaseDn(),filter, controls);
-            if (!renum.hasMore()) {
-                throw new AuthenticationException("Unable to locate any Users");
+            if (renum.hasMore()) {
+                authorized = true;
             }
             context.close();
-            authorized = true;
         } catch (AuthenticationException a) {
             throw new AuthenticationException("Authentication failed: " + a);
         } catch (NamingException e) {
