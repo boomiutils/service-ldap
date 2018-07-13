@@ -60,7 +60,7 @@ public class LdapHelper {
                 Attributes attributes = result.getAttributes();
                 if (attributes != null){
                     if (attributes.get("userPrincipalName") != null){
-                        user.setUsername(attributes.get("userPrincipalName").toString());
+                        user.setUsername(attributes.get(configuration.getUidIdentifier()).toString());
                     }
                     if (attributes.get("givenName")!=null){
                         user.setFirstName(attributes.get("givenName").toString());
