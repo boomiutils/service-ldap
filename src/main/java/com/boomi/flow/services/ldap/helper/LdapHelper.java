@@ -72,7 +72,7 @@ public class LdapHelper {
                         user.setEmail(attributes.get("mail").toString());
                     }
                     if (attributes.get("displayName") != null){
-                        user.setDisplayName(attributes.get("diplayName").toString());
+                        user.setDisplayName(attributes.get("displayName").toString());
                     }
                 }
             }
