@@ -20,6 +20,9 @@ public class ApplicationConfiguration implements Configuration {
     @Configuration.Setting(name = "Password", contentType = ContentType.Password)
     private String password;
 
+    @Configuration.Setting(name = "SSL", contentType = ContentType.Boolean)
+    private boolean ssl;
+
     public String getHost() {
         return host;
     }
@@ -38,5 +41,9 @@ public class ApplicationConfiguration implements Configuration {
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean getSsl() {
+        return ssl;
     }
 }
