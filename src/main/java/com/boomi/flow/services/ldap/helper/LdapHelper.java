@@ -180,7 +180,7 @@ public class LdapHelper {
             if (fetchGroups){
                 System.out.println("%%%%%%%%%%%%%%%% Fetching for User %%%%%%%%%%%%%%%% ");
                 userName = userId;
-                System.out.println(" "+configuration.getAuthBaseDn()+" "+ configuration.getUidIdentifier()+" :"+userName);
+                System.out.println(" "+configuration.getAuthBaseDn()+" "+ configuration.getUserObjectClass() +" "+ configuration.getUidIdentifier()+" :"+userName);
             }
             String filter = "(&("+configuration.getUidIdentifier()+"=" + userName + ")(objectClass="+configuration.getUserObjectClass()+"))";
             NamingEnumeration<SearchResult> renum = context.search(configuration.getAuthBaseDn(),filter, controls);
