@@ -103,7 +103,7 @@ public class LdapHelper {
             userId = userId.substring(userId.indexOf(":")+2, userId.length());
             String filter = "(&(objectClass="+configuration.getGroupObjectClass()+")(member="+configuration.getUidIdentifier()+"="+userId+","+configuration.getAuthBaseDn()+")(cn="+groupName+"))";
             System.out.println(filter);
-            NamingEnumeration<SearchResult> renum = context.search(configuration.getAuthBaseDn(),filter, controls);
+            NamingEnumeration<SearchResult> renum = context.search(configuration.getBaseDn(),filter, controls);
             if (renum.hasMore()) {
                 authorized = true;
             }
