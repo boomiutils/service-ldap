@@ -64,14 +64,8 @@ public class AuthorizationManager {
                     break;
                 }
 
-                try {
-                   ldapUser = helper.authorizeUser(authenticatedWho.getUserId());
-                } catch (AuthenticationException e) {
-                    e.printStackTrace();
-                    break;
-                }
-
                 // We need to check if the authenticated user is one of the authorized users by ID
+                /*
                 if (request.getAuthorization().hasUsers() && ldapUser!=null) {
                     for (Iterator<User> iter = request.getAuthorization().getUsers().iterator(); iter.hasNext(); ) {
                         User u = iter.next();
@@ -80,28 +74,26 @@ public class AuthorizationManager {
                             break;
                         }
                     }
-                }
+                }*/
 
                 // We need to check if the authenticated user is a member of one of the given groups, by group ID
                 if (request.getAuthorization().hasGroups()) {
-                    System.out.println("************Checking Groups***********");
-                    // If the user is a member of no groups, then they're automatically not authorized
-                    if (ldapUser.getGroups() == null || ldapUser.getGroups().isEmpty()) {
-                        System.out.println("************groups are empty***********");
-                        break;
-                    }
                     for (Iterator<Group> iter = request.getAuthorization().getGroups().iterator(); iter.hasNext(); ) {
                         Group g = iter.next();
-                        System.out.println("group "+g.getAuthenticationId().toString());
-                        if (ldapUser.getGroups().contains(g.getAuthenticationId())){
-                            System.out.println("************Groups Match***********");
-                            status = "200";
+                        System.out.println("************"+g.getAuthenticationId()+"***********");
+                        try {
+                            if (helper.authorizeUser(authenticatedWho.getUserId(),g.getAuthenticationId())){
+                                System.out.println("************Groups Match***********");
+                                status = "200";
+                                break;
+                            }
+                        } catch (AuthenticationException e) {
+                            e.printStackTrace();
                             break;
                         }
                     }
                 }
             default:
-                System.out.println("***********Defualt is no go***********");
                 status = "401";
                 break;
         }

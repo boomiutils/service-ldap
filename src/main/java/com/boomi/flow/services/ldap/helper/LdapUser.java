@@ -11,7 +11,7 @@ public class LdapUser {
     private String lastName;
     private String email;
     private String displayName;
-    private ArrayList<String> groups = new ArrayList<String>();
+    //private ArrayList<String> groups = new ArrayList<String>();
 
     // getters
     public String getUsername(){return userName;}
@@ -19,7 +19,7 @@ public class LdapUser {
     public String getLastName(){return lastName;}
     public String getEmail(){return email;}
     public String getDisplayName(){return displayName;}
-    public ArrayList<String> getGroups(){return groups;}
+   // public ArrayList<String> getGroups(){return groups;}
 
     // setters
     public void setUsername(String s){userName = s;}
@@ -27,6 +27,6 @@ public class LdapUser {
     public void setLastName(String s){lastName = s;}
     public void setEmail(String s){email = s;}
     public void setDisplayName(String s){displayName = s;}
-    public void setGroups(ArrayList<String> grps){groups = grps;}
+    //public void setGroups(ArrayList<String> grps){groups = grps;}
 
 }

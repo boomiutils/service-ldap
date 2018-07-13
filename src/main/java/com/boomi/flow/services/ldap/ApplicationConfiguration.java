@@ -17,6 +17,9 @@ public class ApplicationConfiguration implements Configuration {
     @Configuration.Setting(name = "Base DN", contentType = ContentType.String)
     private String baseDn;
 
+    @Configuration.Setting(name = "Group Base DN", contentType = ContentType.String)
+    private String groupBaseDn;
+
     @Configuration.Setting(name = "Principal Base DN", contentType = ContentType.String)
     private String principalBaseDn;
 
@@ -55,6 +58,10 @@ public class ApplicationConfiguration implements Configuration {
 
     public String getBaseDn() {
         return baseDn;
+    }
+
+    public String getGroupBaseDn() {
+        return groupBaseDn;
     }
 
     public String getPrincipalBaseDn() {
